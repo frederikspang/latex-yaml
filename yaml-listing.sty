@@ -1,0 +1,31 @@
+\ProvidesPackage{yaml-listing}
+
+% packages
+\RequirePackage{listings}
+
+
+\newcommand\YAMLcolonstyle{\mdseries\ttfamily\color{red}}
+\newcommand\YAMLkeystyle{\bfseries\ttfamily\color{codegreen}}
+\newcommand\YAMLvaluestyle{\mdseries\ttfamily\color{blue}}
+
+\lstdefinelanguage{yaml} {
+  keywords={true,false,null,y,n},
+  keywordstyle=\color{darkgray},
+  basicstyle=\footnotesize\YAMLkeystyle,                       % assuming a key comes first
+  sensitive=false,
+  comment=[l]{\#},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple},
+  stringstyle=\YAMLvaluestyle,
+  moredelim=[l][\color{orange}]{\&},
+  moredelim=[l][\color{magenta}]{*},
+  moredelim=**[il][\YAMLcolonstyle{:}\YAMLvaluestyle]{:},   % switch to value style at :
+  morestring=[b]',
+  morestring=[b]",
+  literate =    {---}{{\ProcessThreeDashes}}3
+                {>}{{\textcolor{red}\textgreater}}1
+                {|}{{\textcolor{red}\textbar}}1
+                {\ -\ }{{\ -\ }}3,
+}
+
+\newcommand\ProcessThreeDashes{\llap{\color{cyan}\mdseries-{-}-}}
